@@ -1,0 +1,100 @@
+﻿Home Page:
+Login or register:
+1. Create two buttons that will allow the user to choose between register and login.
+
+
+Login Page:
+1. Create a textfield to ask for the SIN
+2. Create a button for login
+3. Create a button for going back to home page
+
+
+Register Page:
+1. Create a text field for each attribute of users. 
+2. Create a “Register” button
+3. Have a dropdown box for the ISA relation and add text field depending on the role selected
+4. Check at the backend to make sure the user is not already created. 
+5. Check if all values in the textboxes are valid. Have a button for registering users.
+6. Write the Insert query to ensure user registration in the backend
+7. Create a button for going back to home page
+
+
+User Page: 
+1. Create a button to navigate to “Maintenance request page”
+2. Create a button to navigate to “View Events” Page
+
+
+Staff Page:
+1. Create a button to navigate to “Maintenance request page”
+2. Create a button to navigate 
+3. Create a button to navigate to “View Events” Page
+4. Create a button to navigate to “Service Contract” page
+5. Create a button to navigate to “View Service Contract” page
+6. Create a button to navigate to “View  Room and Building” page
+
+
+Manager Page:
+1. Create a button to navigate to “Maintenance request page”
+2. Create a button to navigate to “Events” Page
+3. Create a button to navigate to “View Events” Page
+4. Create a button to navigate to “View  Room and Building” page
+5. Create a button to navigate to “Budget” page
+6. Create a button to navigate to  “View Budget” Page 
+7. Create a button to navigate to  “Devices” Page 
+* 
+
+
+
+Maintenance Request Page:
+1. Create textbox for each maintenance request attribute
+2. Have a dropdown box to choose whether we are creating a maintenance request or editing an existing one. If edit is selected, additional textfield is created to specify the maintenanceRequestID
+3. Create a Finish button. If edit is selected, the program finds the instance in the database and update all attributes, if new is selected, add the instance to the database. Program checks for validity of values in the textfield.
+
+
+Create and Edit Service Contract Page:
+1. Create textbox for each service contract attribute
+2. Have a dropdown box to choose whether we are creating a new service contract or editing an existing one. If edit is selected, additional textfield is created to specify the serviceID
+3. Create a Finish button. If edit is selected, the program finds the instance in the database and update all attributes, if new is selected, add the instance to the database. Program checks for validity of values in the textfield.
+
+
+View Maintenance Request Page:
+1. A window to view all existing maintenance requests created by user
+2. Have different attributes shown on the UI as per design
+3. Write backend service/ query to show all the maintenance requests
+
+
+View Room and Building Page:
+1. View all rooms with room number, capacity and building name and electronic equipment as per design.
+2. Write backend services/ query to show all the rooms and building page
+
+
+View Events Page:
+1. View all events with all the required information as per design.
+2. Write backend services/ query to show all the events.
+
+
+
+
+Budget Page: 
+1. View all budgets with all the required information as per design
+2. Write backend services/ query to show all the budgets
+3. Make all budgets editable/ deletable with appropriate buttons for it as per design
+4. Write backend services/ query to update/ delete the budgets
+
+
+View Service Contract Page:
+1. View all service contracts with all the required information as per design.
+2. Write backend services/ query to show all the service contracts.
+
+
+Devices Page:
+1. View all existing electronic equipment with all the required information as per design. 
+2. Write backend services/query to show all electronic equipments
+3. Below that, create textfield for each attribute of electronic equipment.
+4. Have a dropdown box to choose whether we are creating a device or editing an existing one. If edit is selected, additional textfield is created to specify the deviceID
+5. Create a Finish button. If edit is selected, the program finds the instance in the database and update all attributes, if new is selected, add the instance to the database. Program checks for validity of values in the textfield.
+
+
+Side Note:
+1. User can only edit maintenance request that he created himself
+2. Any page with only name ie “Events” page allow creat, delete, edit the events database
