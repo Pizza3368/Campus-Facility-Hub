@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- This meta tag ensures that the website renders correctly across different device sizes, enhancing mobile responsiveness. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the external CSS stylesheet. Uncomment if you wish to customize or add styling. -->
+    <link rel="stylesheet" href="../styles.css">
+
+    <title>Register</title>
+</head>
+<body>
+
+    <h2>REGISTER</h2>
+    <form id="registrationForm">
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="First Name" required>
+            <label>Last Name</label>
+            <input type="text" placeholder="Last Name" required>
+        </div>
+        <div class="form-group">
+            <label>Phone number</label>
+            <input type="number" placeholder="Phone Number" required>
+        </div>
+        <div class="form-group">
+            <label>Address</label>
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="Street Name" required>
+            <input type="text" placeholder="Province" required>
+            <input type="text" placeholder="City" required>
+            <input type="text" placeholder="Postal Code" required>
+        </div>
+        <div class="form-group">
+            <label>SIN</label>
+            <input type="number" placeholder="SIN" required>
+        </div>
+        <div class="form-group">
+            <label>Are you a:</label>
+            <select required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="manager">Manager</option>
+                <option value="staff">Staff Member</option>
+                <option value="organizer">Event Organizer</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <button type="submit" class="appButton">Register</button>
+    </form>
+
+    <!-- ===================================================================================== -->
+    <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
+    <script src="../scripts/registrationPage.js"></script>
+</body>
+</html>

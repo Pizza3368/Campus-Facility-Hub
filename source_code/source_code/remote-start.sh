@@ -25,7 +25,7 @@ ENV_SERVER_PATH="./.env"
 
 # Check the database host name and port
 sed -i "/^ORACLE_HOST=/c\ORACLE_HOST=dbhost.students.cs.ubc.ca" $ENV_SERVER_PATH
-sed -i "/^ORACLE_PORT=/c\ORACLE_PORT=1522" $ENV_SERVER_PATH
+sed -i "/^ORACLE_PORT=/c\ORACLE_PORT=1522" $ENV_SERVER_PATH 
 
 # Define a range
 START=50000

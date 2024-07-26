@@ -6,18 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Link to the external CSS stylesheet. Uncomment if you wish to customize or add styling. -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 
-    <title>Facility Management Software</title>
+    <title>Register</title>
 </head>
 <body>
-    <h2>Facility Management Software</h2>
-    <button id="navigateToRegisterPageButton" class="appButton">Register</button>
-    </br>
-    <button id="navigateToLoginPageButton" class="appButton">Login</button>
-    <button id ="startSoftware" class="appButton"> Start Software </button>
+
+    <h2>Login</h2>
+    <form id="registrationForm">
+        <div class="form-group">
+            <label> First Name</label>
+            <input type="number" placeholder="First Name" required>
+        <div class="form-group">
+            <label> SIN </label>
+            <input type="number" placeholder="SIN" required>
+        </div>
+        <button type="submit" class="appButton">Register</button>
+    </form>
+    
     <!-- ===================================================================================== -->
     <!-- External JavaScript file that contains the functionality/logic for the operations above. -->
-    <script src="./scripts/scripts.js"></script>
+    <script src="../scripts/loginPage.js"></script>
 </body>
 </html>
