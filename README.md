@@ -12,3 +12,15 @@ utilization. Staff Members can manage maintenance requests, assign servicing
 contracts (also managers), and keep track of device maintenance schedules. This
 database system aims to streamline facility management processes, optimize resource
 allocation, and improve overall operational efficiency.
+
+# Time line and task breakdown
+
+Please refer to Project Timeline directory for plans and dates
+
+# UI design
+
+Please refer to Design/ directory
+
+# Milestones
+
+Please refer to Milestones/ directory
