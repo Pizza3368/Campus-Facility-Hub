@@ -1,119 +1,116 @@
 ﻿Home Page:
 Login or register:
-1. Create two buttons that will allow the user to choose between register and login.
-
+Create two buttons that will allow the user to choose between register and login.
 
 Login Page:
-1. Create a textfield to ask for the SIN
-2. Create a textfield for first name
-3. Create a button for login, when clicked, checks database to see if it is a valid user
-
+Create a textfield to ask for the SIN
+Create a textfield to ask for FirstName
+Create a button for login
+Write backend service/ query to check if user already exist and correct credentials firstname+SIN is entered. If successful redirect user to appropriate user page. For example if the user is a manager redirect user to Manager page.
 
 Register Page:
-1. Create a text field for each attribute of users. 
-2. Create a “Register” button
-3. Have a dropdown box for the ISA relation and add text field depending on the role selected
-4. Check at the backend to make sure the user is not already created. 
-5. Check if all values in the textboxes are valid. Have a button for registering users.
-6. Write the Insert query to ensure user registration in the backend
+Create a text field for each attribute of users as per design.
+Create a “Register” button
+Have a dropdown box for the ISA relation and add text field depending on the role selected
+Check at the backend to make sure the user is not already created. 
+Check if all values in the textboxes are valid. Have a button for registering users.
+Write the Insert query to ensure user registration in the backend in the users and appropriate user entity
+If the above query and backend service is successful, redirect the user to the appropriate user page. For example if the user is a manager redirect user to Manager page
 
+Other User Page: 
+Create a button to navigate to “Maintenance request” page
+Create a button to navigate to “Events” Page
+Create a button to navigate to “Rooms and buildings” 
+Create a button to navigate to “Maintain Maintenance request” page.
 
-User Page: 
-1. Create a button to navigate to “View Maintenance request page”
-2. Create a button to navigate to “View Events” Page
-3. Create a button to navigate to “Maintenance request page”
-
-
-Staff Page:
-1. Create a button to navigate to “Maintenance request page”
-3. Create a button to navigate to “View Events” Page
-4. Create a button to navigate to “Service Contract” page
-5. Create a button to navigate to “View Service Contract” page
-6. Create a button to navigate to “View Room and Building” page
-7. Create a button to navigate to “View Service Contract” page
-
+Staff Member Page:
+Create a button to navigate to “Maintenance requests”
+Create a button to navigate to “Events” Page
+Create a button to navigate to “Rooms and buildings” Page
+Create a button to navigate to “Service Contract” page
+Create a button to navigate to “Maintain Maintenance requests Page”
+Create a button to navigate to “Maintain Service Contracts” page
 
 Manager Page:
-1. Create a button to navigate to “Maintenance request page”
-2. Create a button to navigate to “Events” Page
-3. Create a button to navigate to “View Events” Page
-4. Create a button to navigate to “View Room and Building” page
-5. Create a button to navigate to “Budget” page
-6. Create a button to navigate to  “View Budget” Page and "Budget Report" page 
-7. Create a button to navigate to  “Devices” Page and "View Devices" Page
+Create a button to navigate to “Maintenance request page”
+Create a button to navigate to “Events” Page
+Create a button to navigate to “Rooms and Buildings” Page
+Create a button to navigate to “Budgets” Page
+Create a button to navigate to “Maintain Maintenance requests Page”
+Create a button to navigate to “Maintain Budgets” Page
+Create a button to navigate to “Devices” Page
+Create a button to navigate to “Maintain Devices” Page
+Create a button to navigate to “Budget Report” Page
 
+Event Organizer Page:
+Create a button to navigate to “Maintenance requests”
+Create a button to navigate to “Events” Page
+Create a button to navigate to “Rooms and buildings” Page
+Create a button to navigate to “Maintain Maintenance requests Page”
+Create a button to navigate to “Maintain Events” page
+
+Maintain Maintenance Request Page:
+Create textbox for each maintenance request attribute as per design
+Have a dropdown box to choose whether we are creating a maintenance request or editing an existing one or deleting one. If edit is selected, an additional text field is created to specify the maintenanceRequestID and also for delete.
+Create a appropriate button to carry out the create/ edit/ delete functionality. If edit is selected, the program finds the instance in the database and updates all attributes, if new is selected, add the instance to the database. Program checks for validity of values in the textfield. If delete is selected then the maintenance request is deleted upon verification for any dangling references
 
 Maintenance Request Page:
-1. Have a dropdown box to choose whether we are creating a new maintenance request, editing an existing one, or deleting an existing one.
-2. Create textbox for requestID if edit or delete is selected to specify the instance to edit or delete respectively. Create textbox for each maintenance request attribute if create or edit is selected. 
-3. Create a Finish button. If edit is selected, the program finds the instance in the database and update all attributes, if create is selected, add the instance to the database. If delete is selected, delete the instance in the database if it exist. Program checks for validity of values in the textfield.
-
-
-Service Contract Page:
-1. Have a dropdown box to choose whether we are creating a new service contract, editing an existing one, or deleting an existing one.
-2. Create textbox for serviceID if edit or delete is selected to specify the instance to edit or delete respectively. Create textbox for each service contract attribute if create or edit is selected. 
-3. Create a Finish button. If edit is selected, the program finds the instance in the database and update all attributes, if create is selected, add the instance to the database. If delete is selected, delete the instance in the database if it exist. Program checks for validity of values in the textfield.
-
-
-View Maintenance Request Page:
-1. A window to view all existing maintenance requests created by user
-2. Create textbox that shows the requestID of the instance as well as all other attributes along with their values for each instance in the database.
-3. Write backend service/ query to show all the maintenance requests
-
-
-View Room and Building Page:
-1. View all rooms with room number, capacity, building name, location, and electronic equipment using a textbox.
-2. Write backend services/ query to show all the rooms and building page
-
-
-View Events Page:
-1. View all events with all the required information.
-2. Create textbox that shows the eventID of the instance as well as all other attributes along with their values for each instance in the database.
-3. Write backend services/ query to show all the events.
-
+A window to view all existing maintenance requests created by user
+Have different attributes shown on the UI as per design
+Write backend service/ query to show all the maintenance requests
+Have a filter button to filter by severity, status and date
+Write backend service/ query to retrieve based on the selected filter
 
 Events Page:
-1. Have a dropdown box to choose whether we are creating a new event, editing an existing one, or deleting an existing one.
-2. Create textbox for eventID if edit or delete is selected to specify the instance to edit or delete respectively. Create textbox for each service contract attribute if create or edit is selected. 
-3. Create a Finish button. If edit is selected, the program finds the instance in the database and update all attributes, if create is selected, add the instance to the database. If delete is selected, delete the instance in the database if it exist. Program checks for validity of values in the textfield.
+View all events with all the required information as per design.
+Write backend services/ query to show all the events.
+Have a filter button to filter by event type, event cost and date
+Write backend service. Query to retrieve based on the selected filter
 
+Maintain Events Page:
+Create textbox for each events attribute as per design
+Have a dropdown box to choose whether we are creating a event or editing an existing one or deleting one. If edit is selected, additional textfield is created to specify the eventsID and also for delete.
+Create a appropriate button to carry out the create/ edit/ delete functionality. If edit is selected, the program finds the instance in the database and update all attributes, if new is selected, add the instance to the database. Program checks for validity of values in the textfield. If delete is selected then the event is deleted upon verification for any dangling references
+
+Maintain Service Contract Page:
+Create textbox for service contract attribute as per design
+Have a dropdown box to choose whether we are creating a service contract or editing an existing one or deleting one. If edit is selected, an additional text field is created to specify the serviceContractID and also for delete.
+Create an appropriate button to carry out the create/ edit/ delete functionality. If edit is selected, the program finds the instance in the database and updates all attributes, if new is selected, add the instance to the database. Program checks for validity of values in the textfield. If delete is selected then the service contract is deleted upon verification for any dangling references
+
+Service Contract Page:
+View all service contracts with all the required information as per design.
+Write backend services/ query to show all the service contracts.
+Have a filter button to filter by company, maintenance request ID.
+Write backend service. Query to retrieve based on the selected filter
+
+Room and Building Page:
+View all rooms with room number, capacity and building name and electronic equipment as per design.
+Write backend services/ query to show all the rooms and building page
+Have a filter button to filter by electronic equipment, location, capacity
+Write backend service/ query to retrieve based on the selected filter
 
 Budget Page: 
-1. Have a dropdown box to choose whether we are creating a new service contract, editing an existing one, or deleting an existing one.
-2. Create textbox for budgetID if edit or delete is selected to specify the instance to edit or delete respectively. Create textbox for each service contract attribute if create or edit is selected. 
-3. Create a Finish button. If edit is selected, the program finds the instance in the database and update all attributes, if create is selected, add the instance to the database. If delete is selected, delete the instance in the database if it exist. Program checks for validity of values in the textfield.
+View all budgets with all the required information as per design
+Write backend services/ query to show all the budgets
+Have a filter button to filter by amount or any tuple for which amount limit > amount
+Write backend service/ query to retrieve based on the selected filter
 
-
-Budget Report Page:
-1. Create the page as per design with the text fields of start date and last date and a find button
-2. Write backend services/ query to find the total budget required for the mentioned date duration. This needs us to join electronic equipment, service contract and maintenance request and events table.
-
-
-
-View Service Contract Page:
-1. View all service contracts with all the required information.
-2. Create textbox that shows the serviceID of the instance as well as all other attributes along with their values for each instance in the database.
-3. Write backend services/ query to show all the service contracts.
-
+Maintain Budget Page:
+Create textbox for budget attributes as per design
+Have a dropdown box to choose whether we are creating a budget or editing an existing one or deleting one. If edit is selected, an additional text field is created to specify the budget and also for delete.
+Create an appropriate button to carry out the create/ edit/ delete functionality. If edit is selected, the program finds the instance in the database and updates all attributes, if new is selected, add the instance to the database. Program checks for validity of values in the textfield. If delete is selected then the budget is deleted upon verification for any dangling references
 
 Devices Page:
-1. Have a dropdown box to choose whether we are creating a new device, editing an existing one, or deleting an existing one.
-2. Create textbox for deviceID if edit or delete is selected to specify the instance to edit or delete respectively. Create textbox for each service contract attribute if create or edit is selected. 
-3. Create a Finish button. If edit is selected, the program finds the instance in the database and update all attributes, if create is selected, add the instance to the database. If delete is selected, delete the instance in the database if it exist. Program checks for validity of values in the textfield.
+View all existing electronic equipment with all the required information as per design. 
+Write backend services/query to show all electronic equipments
+Have a filter button to filter by expired date, warranty, energy rate, cost, manufacturer, warranty
+Write backend service/ query to retrieve based on the selected filter
 
+Maintain Devices Page:
+Create textbox for devices attributes as per design
+Have a dropdown box to choose whether we are creating a device or editing an existing one or deleting one. If edit is selected, an additional text field is created to specify the deviceID and also for delete.
+Create an appropriate button to carry out the create/ edit/ delete functionality. If edit is selected, the program finds the instance in the database and updates all attributes, if new is selected, add the instance to the database. Program checks for validity of values in the textfield. If delete is selected then the device is deleted upon verification for any dangling references
 
-View Devices Page:
-1. View all existing electronic equipment with all the required information. 
-2. Create textbox that shows the deviceID of the instance as well as all other attributes along with their values for each instance in the database.
-3. Write backend services/query to show all electronic equipments
-
-
-View Budget Page:
-1. View all budgets with all the required information.
-2. Create textbox that shows the budgetID of the instance as well as all other attributes along with their values for each instance in the database.
-3. Write backend services/ query to show all the budgets
-
-
-Side Note:
-1. User can only edit maintenance request that he created himself
-2. Any page with only name ie “Events” page allow creat, delete, edit the events database
+Budget Report Page:
+Create the page as per design with the text fields of start date and last date and a find button
+Write backend services/ query to find the total budget required for the mentioned date duration. This needs us to join electronic equipment, service contract and maintenance request and events table.
