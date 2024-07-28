@@ -1,5 +1,5 @@
 const oracledb = require('oracledb');
-const loadEnvFile = require('./utils/envUtil');
+const loadEnvFile = require('../utils/envUtil');
 
 const envVariables = loadEnvFile('./.env');
 
@@ -76,77 +76,46 @@ async function testOracleConnection() {
     });
 }
 
-async function fetchDemotableFromDb() {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT * FROM DEMOTABLE');
-        return result.rows;
-    }).catch(() => {
-        return [];
-    });
-}
-
-async function initiateDemotable() {
+async function initiateDatabaseTables() {
     return await withOracleDB(async (connection) => {
         try {
-            await connection.execute(`DROP TABLE DEMOTABLE`);
+            await connection.execute(`DROP TABLE UserData`);
+            await connection.execute(`DROP TABLE AddressData`)
         } catch(err) {
             console.log('Table might not exist, proceeding to create...');
         }
 
-        const result = await connection.execute(`
-            CREATE TABLE DEMOTABLE (
-                id NUMBER PRIMARY KEY,
-                name VARCHAR2(20)
+        await connection.execute(`
+            CREATE TABLE AddressData(
+                postalCode VARCHAR(20),
+                City VARCHAR(20) NOT NULL,
+                Province VARCHAR(20) NOT NULL,
+                PRIMARY KEY (postalCode)
             )
         `);
+
+        await connection.execute(`
+            CREATE TABLE UserData(
+                userID INTEGER,
+                firstName VARCHAR(20) NOT NULL,
+                lastName VARCHAR(20) NOT NULL,
+                SIN INTEGER NOT NULL UNIQUE,
+                address VARCHAR(40) NOT NULL,
+                postalCode VARCHAR(20),
+                PRIMARY KEY (userID),
+                FOREIGN KEY (postalCode) REFERENCES AddressData (postalCode)
+                ON DELETE SET NULL
+            )
+        `
+        )
         return true;
     }).catch(() => {
         return false;
     });
 }
 
-async function insertDemotable(id, name) {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute(
-            `INSERT INTO DEMOTABLE (id, name) VALUES (:id, :name)`,
-            [id, name],
-            { autoCommit: true }
-        );
-
-        return result.rowsAffected && result.rowsAffected > 0;
-    }).catch(() => {
-        return false;
-    });
-}
-
-async function updateNameDemotable(oldName, newName) {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute(
-            `UPDATE DEMOTABLE SET name=:newName where name=:oldName`,
-            [newName, oldName],
-            { autoCommit: true }
-        );
-
-        return result.rowsAffected && result.rowsAffected > 0;
-    }).catch(() => {
-        return false;
-    });
-}
-
-async function countDemotable() {
-    return await withOracleDB(async (connection) => {
-        const result = await connection.execute('SELECT Count(*) FROM DEMOTABLE');
-        return result.rows[0][0];
-    }).catch(() => {
-        return -1;
-    });
-}
-
 module.exports = {
     testOracleConnection,
-    fetchDemotableFromDb,
-    initiateDemotable, 
-    insertDemotable, 
-    updateNameDemotable, 
-    countDemotable
+    withOracleDB,
+    initiateDatabaseTables,
 };

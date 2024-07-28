@@ -1,5 +1,5 @@
 const express = require('express');
-const appService = require('./appService');
+const appService = require('../backendServices/appService');
 
 const router = express.Router();
 
@@ -12,6 +12,20 @@ router.get('/check-db-connection', async (req, res) => {
         res.send('connected');
     } else {
         res.send('unable to connect');
+    }
+});
+
+router.post('/initializeDBTable', async (req, res) => {
+    const isInitDone = await appService.initiateDatabaseTables();
+    if (isInitDone == true) {
+        res.status(200).json({
+            message: "Server setup done"
+        })
+    }
+    else {
+        res.status(500).json({
+            message: "Server setup failed"
+        })
     }
 });
 
