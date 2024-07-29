@@ -1,0 +1,18 @@
+Budget Report Page -- Syed
+Maintain Budget Page -- Syed
+Budget Page -- Syed
+Manager Page -- Syed
+Staff Member page -- Syed
+Other User Page -- Syed
+Event Organizer Page -- Syed
+
+Maintain Device Page -- Eric
+Devices Page -- Eric
+Room and Building Page -- Eric
+Maintenance request Page -- Eric
+Maintain Maintenance request Page -- Eric
+
+Service Contract Page -- Sandy
+Maintain service contract -- Sandy
+Maintain Events Page -- Sandy
+Events Page -- Sandy
