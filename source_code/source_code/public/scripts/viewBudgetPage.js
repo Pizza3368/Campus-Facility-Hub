@@ -27,6 +27,7 @@ function displayBudgets(budgets) {
                 <p><strong>Amount:</strong> $${budget.amount.toLocaleString()}</p>
                 <p><strong>Project Type:</strong> ${budget.projectType}</p>
                 <p><strong>Duration:</strong> ${budget.startDate} - ${budget.endDate}</p>
+                <p><strong>Created By:</strong> Manager ${budget.firstName} ${budget.lastName}</p>
             </div>
         `;
         container.appendChild(budgetDiv);

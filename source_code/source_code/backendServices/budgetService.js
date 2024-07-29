@@ -4,10 +4,9 @@ async function getAllBudgetInformation() {
     return await appService.withOracleDB(async (connection) => {
         const allBudgets = await connection.execute(
             `
-            SELECT 
-            budgetID, startDate, endDate, amount, projectType 
-            FROM 
-            Budget
+            SELECT budgetID, startDate, endDate, amount, projectType, UserData.firstName, UserData.lastName
+            FROM Budget
+            JOIN UserData on UserData.userID = Budget.ManagerID
             `,
             [],
             {autocommit: true},
@@ -17,7 +16,9 @@ async function getAllBudgetInformation() {
             startDate: row[1],
             endDate: row[2],
             amount: row[3],
-            projectType: row[4]
+            projectType: row[4],
+            firstName: row[5],
+            lastName: row[6],
         }));
         return {success: true, budgets}
     }).catch((error) => {
