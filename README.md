@@ -24,3 +24,15 @@ Please refer to Design/ directory
 # Milestones
 
 Please refer to Milestones/ directory
+
+# How to run
+
+1. Go to source_code/source_code
+2. Run: sqlplus ora_<cwlUserName>@stu
+3. Type in your password: a<studentId>
+4. Run: start buildTables.sql
+
+The above will create all the tables. 
+
+5. quit from the sql plus
+6. Run sh ./remote-start.sh

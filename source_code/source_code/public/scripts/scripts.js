@@ -13,20 +13,4 @@ window.onload = async function() {
         window.location.href = "/pages/loginPage.html";
     });
 
-    document.getElementById("startSoftware").addEventListener("click", async () => {
-        const response = await fetch('/initializeDBTable', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        });
-    
-        if (response.status === 500) {
-            alert("Unable to initialize database in server.")
-        } 
-    })
-    /*
-    
-    */
-
 };

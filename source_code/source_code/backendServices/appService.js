@@ -76,46 +76,15 @@ async function testOracleConnection() {
     });
 }
 
-async function initiateDatabaseTables() {
-    return await withOracleDB(async (connection) => {
-        try {
-            await connection.execute(`DROP TABLE UserData`);
-            await connection.execute(`DROP TABLE AddressData`)
-        } catch(err) {
-            console.log('Table might not exist, proceeding to create...');
-        }
-
-        await connection.execute(`
-            CREATE TABLE AddressData(
-                postalCode VARCHAR(20),
-                City VARCHAR(20) NOT NULL,
-                Province VARCHAR(20) NOT NULL,
-                PRIMARY KEY (postalCode)
-            )
-        `);
-
-        await connection.execute(`
-            CREATE TABLE UserData(
-                userID INTEGER,
-                firstName VARCHAR(20) NOT NULL,
-                lastName VARCHAR(20) NOT NULL,
-                SIN INTEGER NOT NULL UNIQUE,
-                address VARCHAR(40) NOT NULL,
-                postalCode VARCHAR(20),
-                PRIMARY KEY (userID),
-                FOREIGN KEY (postalCode) REFERENCES AddressData (postalCode)
-                ON DELETE SET NULL
-            )
-        `
-        )
-        return true;
-    }).catch(() => {
-        return false;
-    });
+// Function to generate a unique user ID
+function generateUserID() {
+    const min = 100000;
+    const max = 999999;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 module.exports = {
     testOracleConnection,
     withOracleDB,
-    initiateDatabaseTables,
+    generateUserID,
 };
