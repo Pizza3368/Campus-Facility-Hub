@@ -21,7 +21,8 @@ router.post("/registerUser", async (req, res) => {
         const isInserted = await userService.insertOtherUser(firstName, lastName, streetName, city, province, postalCode, sin);
         if (isInserted.success === true) {
             res.status(200).json({
-                message: "User registration successful."
+                message: "User registration successful.",
+                userId: isInserted.userID
             });
         }
         else {
@@ -37,7 +38,8 @@ router.post("/registerUser", async (req, res) => {
         const isInserted = await userService.insertManager(firstName, lastName, streetName, city, province, postalCode, workExperience, sin);
         if (isInserted.success === true) {
             res.status(200).json({
-                message: "Manager registration successful"
+                message: "Manager registration successful",
+                userId: isInserted.userID
             });
         }else {
             res.status(500).json({
@@ -52,12 +54,13 @@ router.post("/registerUser", async (req, res) => {
         const isInserted = await userService.insertStaffMember(firstName, lastName, streetName, city, province, postalCode, role, sin);
         if (isInserted.success === true) {
             res.status(200).json({
-                message: "Staff Member registration successful"
+                message: "Staff Member registration successful",
+                userId: isInserted.userID
             });
         }
         else {
             res.status(500).json({
-                message: "Staff Member registration failed"
+                message: "Staff Member registration failed",
             });
         }
     }
@@ -68,7 +71,8 @@ router.post("/registerUser", async (req, res) => {
         const isInserted = await userService.insertEventOrganizer(firstName, lastName, streetName, city, province, postalCode, organizerLevel, sin);
         if (isInserted.success === true) {
             res.status(200).json({
-                message: "Event organizer registration successful."
+                message: "Event organizer registration successful.",
+                userId: isInserted.userID
             })
         }
         else {
@@ -85,9 +89,21 @@ router.post("/registerUser", async (req, res) => {
     }
 });
 
-router.post("/login", (req, res) => {
+router.post("/loginUser", async (req, res) => {
     const firstName = req.body.firstName;
     const sin = req.body.sin;
-})
+    const result = await userService.getUserBySinAndFirstName(firstName, sin);
+    if (result.success === true) {
+        res.status(200).json({
+            user: result.data
+        });
+    }
+    else {
+        res.status(500).json({
+            message: "User does not exist"
+        })
+    }
+    
+});
 
 module.exports = router;

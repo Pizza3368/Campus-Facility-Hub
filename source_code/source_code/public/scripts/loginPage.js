@@ -1,22 +1,55 @@
+/*
+event listener associated with the form.
+*/
 document.addEventListener('DOMContentLoaded', function() {
-    const boxContainer = document.getElementById('boxContainer');
-    const boxTemplate = document.getElementById('boxTemplate').content;
+    const registrationForm = document.getElementById('registrationForm');
 
-    // Example data array
-    const data = [
-        { title: 'Box 1', content: 'This is the content of box 1.' },
-        { title: 'Box 2', content: 'This is the content of box 2.' },
-        { title: 'Box 3', content: 'This is the content of box 3.' }
-    ];
+    registrationForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
 
-    // Function to create and append a box component
-    function createBox(data) {
-        const boxClone = document.importNode(boxTemplate, true);
-        boxClone.querySelector('.box-title').textContent = data.title;
-        boxClone.querySelector('.box-content').textContent = data.content;
-        boxContainer.appendChild(boxClone);
-    }
-
-    // Create boxes for each data item
-    data.forEach(item => createBox(item));
+        const firstName = document.querySelector('input[placeholder="First Name"]').value;
+        const sin = document.querySelector('input[placeholder="SIN"]').value;
+        
+        const formData = {
+            firstName,
+            sin,
+        };
+        await loginUser(formData);
+    });
 });
+
+/*
+login user.
+*/
+async function loginUser(formData) {
+    const response = await fetch('/user/loginUser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    });
+
+    if (response.status !== 200) {
+        alert("Unable to register now. Please verify your SIN number or try again later.");
+    }
+    else {
+        const data = await response.json();
+        const userType = data.user.role;
+        const userId = data.user.userID;
+        
+        if (userType=== "other"){
+            window.location.href = "/pages/otherUserPage.html?userId=" + encodeURIComponent(userId);
+        }
+        else if (userType === "manager") {
+            window.location.href = "/pages/managerPage.html?userId=" + encodeURIComponent(userId);
+        }
+        else if (userType === "staff") {
+            window.location.href = "/pages/staffMemberPage.html?userId=" + encodeURIComponent(userId);
+        }
+        else if (userType === "organizer") {
+            window.location.href = "/pages/eventOrganizerPage.html?userId=" + encodeURIComponent(userId);
+        }
+        
+    }
+}

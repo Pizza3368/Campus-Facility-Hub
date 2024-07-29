@@ -47,4 +47,9 @@ window.onload = function() {
         alert("Should navigate to maintain service contract page.") /* Add code here.*/
     });
     
+    console.log(getUserId());
+}
+
+function getUserId() {
+    return new URLSearchParams(window.location.search).get('userId');
 }

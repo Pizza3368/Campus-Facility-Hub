@@ -1,6 +1,7 @@
 const appService = require('../backendServices/appService');
 const addressService = require('../backendServices/addressService');
 
+
 async function insertOtherUser(firstName, lastName, streetName, city, province, postalCode, sin) {
     return await appService.withOracleDB(async (connection) => {
         try {
@@ -43,7 +44,6 @@ async function insertManager(firstName, lastName, streetName, city, province, po
             const managerInsertResult = await connection.execute(
                 `INSERT INTO Manager (userID, workExperience) VALUES (:userID, :workExperience)`,
                 { userID, workExperience },
-                { autoCommit: true }
             );
 
             if (managerInsertResult.rowsAffected && managerInsertResult.rowsAffected > 0) {
@@ -118,9 +118,54 @@ async function insertEventOrganizer(firstName, lastName, streetName, city, provi
     }
 }
 
+async function getUserBySinAndFirstName(firstName, sin) {
+    return await appService.withOracleDB(async (connection) => {
+        const userResult = await connection.execute(
+            `
+            SELECT 
+    UserData.userID,
+    CASE 
+        WHEN Manager.userID IS NOT NULL THEN 'manager'
+        WHEN EventOrganizer.userID IS NOT NULL THEN 'organizer'
+        WHEN StaffMember.userID IS NOT NULL THEN 'staff'
+        ELSE 'other'
+    END AS Role
+FROM 
+    UserData
+LEFT JOIN 
+    Manager ON Manager.userID = UserData.userID
+LEFT JOIN 
+    EventOrganizer ON EventOrganizer.userID = UserData.userID
+LEFT JOIN 
+    StaffMember ON StaffMember.userID = UserData.userID
+WHERE 
+    UserData.firstName = :firstName 
+    AND UserData.SIN = :sin
+            `,
+            {firstName, sin},
+            {autoCommit: true}
+        );
+        const user = userResult.rows.map((row) => ({
+            userID: row[0],
+            role: row[1]
+        }));
+        if (user[0]) {
+            return {success: true, data: user[0]};
+        }
+        else {
+            return {success: false}
+        }
+        
+    }).catch((error) => {
+        console.error('Error in withOracleDB: ',error);
+        return {success: false};
+    })
+}
+
 module.exports = { 
     insertOtherUser,
     insertManager,
     insertStaffMember,
     insertEventOrganizer,
+    getUserBySinAndFirstName,
  };

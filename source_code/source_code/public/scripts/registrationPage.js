@@ -68,8 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (additionalField.style.display !== 'none' && additionalFieldInput.value) {
             formData[additionalFieldInput.name] = additionalFieldInput.value;
         }
-
-        console.log(formData);
         await registerUser(formData);
         
     });
@@ -87,22 +85,23 @@ async function registerUser(formData) {
         body: JSON.stringify(formData)
     });
 
-    console.log('Response Status:', response.status);
     if (response.status !== 200) {
         alert("Unable to register now. Please verify your SIN number or try again later.");
     }
     else {
+        const data = await response.json();
+        const userId = data.userId;
         if (formData.userType === "other"){
-            window.location.href = "/pages/otherUserPage.html";
+            window.location.href = "/pages/otherUserPage.html?userId="+encodeURIComponent(userId);
         }
         else if (formData.userType === "manager") {
-            window.location.href = "/pages/managerPage.html";
+            window.location.href = "/pages/managerPage.html?userId="+encodeURIComponent(userId);
         }
         else if (formData.userType === "staff") {
-            window.location.href = "/pages/staffMemberPage.html"
+            window.location.href = "/pages/staffMemberPage.html?userId="+encodeURIComponent(userId);
         }
         else if (formData.userType === "organizer") {
-            window.location.href = "/pages/eventOrganizerPage.html"
+            window.location.href = "/pages/eventOrganizerPage.html?userId="+encodeURIComponent(userId);
         }
         
     }
