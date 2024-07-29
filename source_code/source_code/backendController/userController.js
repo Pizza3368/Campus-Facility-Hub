@@ -3,10 +3,10 @@ const middlewares = require('../backendMiddlewares/middleware');
 const userService = require('../backendServices/userService');
 const router = express.Router();
 
+/* Ensure database is connected every time a request is made.*/
 router.use(middlewares.checkDBConnection);
 
 router.post("/registerUser", async (req, res) => {
-    console.log(req.body);
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const streetName = req.body.address.streetName;
@@ -16,9 +16,10 @@ router.post("/registerUser", async (req, res) => {
     const sin = req.body.sin;
     const userType = req.body.userType;
 
+    /* register as other user.*/
     if (userType === "other") {
         const isInserted = await userService.insertOtherUser(firstName, lastName, streetName, city, province, postalCode, sin);
-        if (isInserted) {
+        if (isInserted.success === true) {
             res.status(200).json({
                 message: "User registration successful."
             });
@@ -29,6 +30,64 @@ router.post("/registerUser", async (req, res) => {
             });
         }
     }
+
+    /* register as manager.*/
+    else if (userType === "manager") {
+        const workExperience = req.body.workExperience;
+        const isInserted = await userService.insertManager(firstName, lastName, streetName, city, province, postalCode, workExperience, sin);
+        if (isInserted.success === true) {
+            res.status(200).json({
+                message: "Manager registration successful"
+            });
+        }else {
+            res.status(500).json({
+                message: "Manager registration failed."
+            })
+        }
+    }
+
+    /* register as staff memeber.*/
+    else if (userType === "staff") {
+        const role = req.body.role;
+        const isInserted = await userService.insertStaffMember(firstName, lastName, streetName, city, province, postalCode, role, sin);
+        if (isInserted.success === true) {
+            res.status(200).json({
+                message: "Staff Member registration successful"
+            });
+        }
+        else {
+            res.status(500).json({
+                message: "Staff Member registration failed"
+            });
+        }
+    }
+
+    /* register as event organizer */
+    else if (userType === "organizer") {
+        const organizerLevel = req.body.organizerLevel;
+        const isInserted = await userService.insertEventOrganizer(firstName, lastName, streetName, city, province, postalCode, organizerLevel, sin);
+        if (isInserted.success === true) {
+            res.status(200).json({
+                message: "Event organizer registration successful."
+            })
+        }
+        else {
+            res.status(500).json({
+                message: "Event organizer registration failed."
+            })
+        }
+    }
+
+    else {
+        res.status(500).json({
+            message: "User is not a valid user type."
+        })
+    }
+});
+
+router.post("/login", (req, res) => {
+    const firstName = req.body.firstName;
+    const sin = req.body.sin;
 })
 
 module.exports = router;

@@ -76,15 +76,27 @@ async function testOracleConnection() {
     });
 }
 
+// Function to generate a unique user ID
+function generateUserID() {
+    const min = 100000;
+    const max = 999999;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 async function initiateDatabaseTables() {
     return await withOracleDB(async (connection) => {
         try {
+            /* Add drop table statements here.*/
+            await connection.execute(`DROP TABLE EventOrganizer`);
+            await connection.execute(`DROP TABLE StaffMember`);
+            await connection.execute(`DROP TABLE Manager`);
             await connection.execute(`DROP TABLE UserData`);
-            await connection.execute(`DROP TABLE AddressData`)
+            await connection.execute(`DROP TABLE AddressData`);
         } catch(err) {
             console.log('Table might not exist, proceeding to create...');
         }
 
+        /* Create the address table. */
         await connection.execute(`
             CREATE TABLE AddressData(
                 postalCode VARCHAR(20),
@@ -94,6 +106,7 @@ async function initiateDatabaseTables() {
             )
         `);
 
+        /* Create the user data table.*/
         await connection.execute(`
             CREATE TABLE UserData(
                 userID INTEGER,
@@ -108,6 +121,44 @@ async function initiateDatabaseTables() {
             )
         `
         )
+
+        /**Create the manager table */
+        await connection.execute(
+            `
+            CREATE TABLE Manager(
+                workExperience INTEGER NOT NULL,
+                userID INTEGER,
+                PRIMARY KEY (userID),
+                FOREIGN KEY (userID) REFERENCES UserData(userID) ON DELETE CASCADE
+            )
+            `
+        );
+
+        /* Create staff member table.*/
+        await connection.execute(
+            `
+            CREATE TABLE StaffMember(
+                role VARCHAR(20) NOT NULL,
+                userID INTEGER,
+                PRIMARY KEY (userID),
+                FOREIGN KEY (userID) REFERENCES UserData(userID) ON DELETE CASCADE
+            )
+            `
+        );
+
+        /* Create event organizer table.*/
+        await connection.execute(
+            `
+            CREATE TABLE EventOrganizer(
+                organizerLevel INTEGER NOT NULL,
+                userID INTEGER,
+                PRIMARY KEY (userID),
+                FOREIGN KEY (userID) REFERENCES UserData(userID) ON DELETE CASCADE
+            )
+            `
+        );
+
+        /* All tables here, remember to add the drop table statement here. Create table fails if table is not dropped before. */
         return true;
     }).catch(() => {
         return false;
@@ -118,4 +169,5 @@ module.exports = {
     testOracleConnection,
     withOracleDB,
     initiateDatabaseTables,
+    generateUserID,
 };

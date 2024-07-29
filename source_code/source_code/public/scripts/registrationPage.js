@@ -3,13 +3,48 @@ event listener associated with the form.
 */
 document.addEventListener('DOMContentLoaded', function() {
     const registrationForm = document.getElementById('registrationForm');
+    const roleSelect = document.querySelector('select');
+    const additionalField = document.getElementById('additionalField');
+    const additionalFieldLabel = document.getElementById('additionalFieldLabel');
+    const additionalFieldInput = document.getElementById('additionalFieldInput');
+
+    roleSelect.addEventListener('change', function() {
+        const selectedRole = this.value;
+        switch (selectedRole) {
+            case 'manager':
+                additionalField.style.display = '';
+                additionalFieldLabel.textContent = 'Work Experience (Years):';
+                additionalFieldInput.placeholder = 'Enter your work experience';
+                additionalFieldInput.name = 'workExperience';
+                additionalFieldInput.type = 'number';
+                break;
+            case 'staff':
+                additionalField.style.display = '';
+                additionalFieldLabel.textContent = 'Role:';
+                additionalFieldInput.placeholder = 'Enter your role';
+                additionalFieldInput.name = 'role';
+                additionalFieldInput.type = 'text';
+                break;
+            case 'organizer':
+                additionalField.style.display = '';
+                additionalFieldLabel.textContent = 'Organizer Level:';
+                additionalFieldInput.placeholder = 'Enter organizer level';
+                additionalFieldInput.name = 'organizerLevel';
+                additionalFieldInput.type = 'number';
+                break;
+            default:
+                additionalField.style.display = 'none';
+                additionalFieldInput.name = 'other';
+                additionalFieldInput.required =  false;
+                break;
+        }
+    });
 
     registrationForm.addEventListener('submit', async function(event) {
         event.preventDefault();
 
         const firstName = document.querySelector('input[placeholder="First Name"]').value;
         const lastName = document.querySelector('input[placeholder="Last Name"]').value;
-        const phoneNumber = document.querySelector('input[placeholder="Phone Number"]').value;
         const streetName = document.querySelector('input[placeholder="Street Name"]').value;
         const province = document.querySelector('input[placeholder="Province"]').value;
         const city = document.querySelector('input[placeholder="City"]').value;
@@ -20,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = {
             firstName,
             lastName,
-            phoneNumber,
             address: {
                 streetName,
                 province,
@@ -31,10 +65,12 @@ document.addEventListener('DOMContentLoaded', function() {
             userType
         };
 
-        console.log(formData);
-        if (userType === "other") {
-            registerAsOtherUser(formData);
+        if (additionalField.style.display !== 'none' && additionalFieldInput.value) {
+            formData[additionalFieldInput.name] = additionalFieldInput.value;
         }
+
+        console.log(formData);
+        await registerUser(formData);
         
     });
 });
@@ -42,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
 /*
 registers user as other user.
 */
-async function registerAsOtherUser(formData) {
+async function registerUser(formData) {
     const response = await fetch('/user/registerUser', {
         method: 'POST',
         headers: {
@@ -52,6 +88,22 @@ async function registerAsOtherUser(formData) {
     });
 
     console.log('Response Status:', response.status);
-    const responseData = await response.json();
-    console.log(responseData);
+    if (response.status !== 200) {
+        alert("Unable to register now. Please verify your SIN number or try again later.");
+    }
+    else {
+        if (formData.userType === "other"){
+            window.location.href = "/pages/otherUserPage.html";
+        }
+        else if (formData.userType === "manager") {
+            window.location.href = "/pages/managerPage.html";
+        }
+        else if (formData.userType === "staff") {
+            window.location.href = "/pages/staffMemberPage.html"
+        }
+        else if (formData.userType === "organizer") {
+            window.location.href = "/pages/eventOrganizerPage.html"
+        }
+        
+    }
 }
