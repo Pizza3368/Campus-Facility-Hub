@@ -16,7 +16,7 @@ window.onload = function() {
     });
 
     document.getElementById("budgets")?.addEventListener("click", () => {
-        alert("Should navigate to Budgets page.") /* Add code here.*/
+        window.location.href = "/pages/viewBudgetPage.html?userId="+encodeURIComponent(getUserId())
     });
 
     document.getElementById("maintainBudget")?.addEventListener("click", () => {
