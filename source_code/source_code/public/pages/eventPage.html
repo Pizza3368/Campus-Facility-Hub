@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the external CSS stylesheet -->
+    <link rel="stylesheet" href="../styles.css">
+
+    <title>Manage Events</title>
+</head>
+<body>
+
+    <h2>Manage Events</h2>
+
+    <form id="manageEventsForm">
+        <div class="form-group">
+            <label for="action">Do you want to</label>
+            <select id="action">
+                <option value="edit">Edit</option>
+                <option value="delete">Delete</option>
+                <option value="create">Create</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="start-time">Start Time</label>
+            <input type="text" id="start-time" placeholder="Start Time">
+        </div>
+        <div class="form-group">
+            <label for="end-time">End Time</label>
+            <input type="text" id="end-time" placeholder="End Time">
+        </div>
+        <div class="form-group">
+            <label for="num-people">Number of people</label>
+            <input type="text" id="num-people" placeholder="Number of people">
+        </div>
+        <div class="form-group">
+            <label for="event-cost">Event cost</label>
+            <input type="text" id="event-cost" placeholder="Event cost">
+        </div>
+        <div class="form-group">
+            <label for="purpose">Purpose</label>
+            <input type="text" id="purpose" placeholder="Purpose">
+        </div>
+        <div class="form-group">
+            <label for="type">Type</label>
+            <input type="text" id="type" placeholder="Type">
+        </div>
+        <div class="form-group">
+            <label for="cost">Cost</label>
+            <input type="text" id="cost" placeholder="Cost">
+        </div>
+        <div class="form-group">
+            <label for="room-number">Room Number</label>
+            <input type="text" id="room-number" placeholder="Room Number">
+        </div>
+        <div class="form-group">
+            <label for="building-name">Building Name</label>
+            <input type="text" id="building-name" placeholder="Building Name">
+        </div>
+        <button type="submit" class="appButton">Create</button>
+    </form>
+
+</body>
+</html>

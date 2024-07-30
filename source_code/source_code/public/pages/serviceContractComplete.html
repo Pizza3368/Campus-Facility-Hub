@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- This meta tag ensures that the website renders correctly across different device sizes, enhancing mobile responsiveness. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the external CSS stylesheet. Uncomment if you wish to customize or add styling. -->
+    <link rel="stylesheet" href="../styles.css">
+
+    <title>serviceContractComplete</title>
+</head>
+
+
+<body>
+
+    <h2>Manage Service Contracts</h2>
+
+    <form id="manageServiceContractsForm">
+        <div class="form-group">
+            <label for="action">Do you want to</label>
+            <select id="action">
+                <option value="edit">Edit</option>
+                <option value="delete">Delete</option>
+                <option value="create">Create</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="contract-id">ID:</label>
+            <input type="text" id="contract-id" placeholder="Enter contract ID">
+        </div>
+        <div class="note">
+            Note: This will mark all maintenance requests associated with this service contract as completed
+        </div>
+        <button type="submit" class="appButton">Complete</button>
+    </form>
+
+</body>
+</html>

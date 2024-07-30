@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link to the external CSS stylesheet -->
+    <link rel="stylesheet" href="../styles.css">
+
+    <title>eventView</title>
+    <style>
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .filter {
+            text-align: right;
+            margin: 20px 0;
+        }
+        .card {
+            background-color: #e0f7ff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .card p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Events</h2>
+
+    <div class="filter">
+        Filter By:
+        <select id="filter">
+            <option value="eventType">Event Type</option>
+            <option value="eventCost">Event Cost</option>
+            <option value="date">Date</option>
+        </select>
+    </div>
+
+    <div class="card">
+        <h3>#3431</h3>
+        <p>Duration:</p>
+        <p>Number of People:</p>
+        <p>Event Type:</p>
+        <p>Event Cost:</p>
+        <p>Room Number:</p>
+        <p>Building Name</p>
+        <p>Floor:</p>
+    </div>
+ 
+    <!-- Additional cards can be added here -->
+</div>
+
+</body>
+</html>
