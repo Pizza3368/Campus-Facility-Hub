@@ -20,7 +20,7 @@ window.onload = function() {
     });
 
     document.getElementById("maintainBudget")?.addEventListener("click", () => {
-        alert("Should navigate to maintain Budgets page.") /* Add code here.*/
+        window.location.href = "/pages/maintainBudgetPage.html?userId="+encodeURIComponent(getUserId())
     });
 
     document.getElementById("viewDevices")?.addEventListener("click", () => {

@@ -33,13 +33,14 @@ async function createBudget(startDate, endDate, amount, managerID, projectType) 
         const budgetInsertionResult = await connection.execute(
             `
             INSERT INTO Budget(budgetID, startDate, endDate, amount, managerID, projectType) 
-            VALUES (budgetID, :startDate, :endDate, :amount ,:managerID, :projectType)
+            VALUES (:budgetID, TO_DATE(:startDate, 'YYYY-MM-DD'), TO_DATE(:endDate, 'YYYY-MM-DD'), :amount ,:managerID, :projectType)
             `,
             {budgetID, startDate, endDate, amount, managerID, projectType},
             {autocommit: true}
         );
 
         if (budgetInsertionResult.rowsAffected && budgetInsertionResult.rowsAffected > 0) {
+            await connection.commit();
             return {success: true };
         };
     }).catch((error) => {
@@ -52,8 +53,9 @@ async function updateBudget(budgetID, startDate, endDate, amount, managerID, pro
     return await appService.withOracleDB(async (connection) => {
         const updateResult = await connection.execute(
             `
-            UPDATE Budget SET startDate = :startDate, 
-            endDate = :endDate, 
+            UPDATE Budget SET 
+            startDate = TO_DATE(:startDate, 'YYYY-MM-DD'), 
+            endDate = TO_DATE(:endDate, 'YYYY-MM-DD'), 
             amount = :amount, 
             managerID = :managerID, 
             projectType = :projectType
@@ -64,6 +66,7 @@ async function updateBudget(budgetID, startDate, endDate, amount, managerID, pro
         );
 
         if (updateResult.rowsAffected && updateResult.rowsAffected > 0) {
+            await connection.commit();
             return {success: true};
         } else {
             return {success: false };
@@ -85,13 +88,35 @@ async function deleteBudget(budgetID) {
         );
 
         if (deleteResult.rowsAffected && deleteResult.rowsAffected > 0) {
+            await connection.commit();
             return {success: true};
         } else {
             return {success: false};
         }
     }).catch((error) => {
-        console.error('Error in withOracleDB during delete: ', error);
-        return {success: false, error: error.message};
+        console.error('Error in withOracleDB ', error);
+        return {success: false };
+    });
+}
+
+async function getAllProjectTypesForBudgets() {
+    return await appService.withOracleDB(async(connection) => {
+        const projectTypesResult = await connection.execute(
+            `
+            SELECT ProjectType from ProjectCost
+            `,
+            [],
+            {autoCommit: true},
+        );
+
+        const projectsTypes = projectTypesResult.rows.map((row) => ({
+            projectTypes: row[0],
+        }));
+
+        return {success: true, projectsTypes};
+    }).catch((error) => {
+        console.error('Error in withOracleDB ', error);
+        return {success: false };
     });
 }
 
@@ -101,5 +126,6 @@ module.exports = {
     getAllBudgetInformation,
     createBudget,
     updateBudget,
-    deleteBudget
+    deleteBudget,
+    getAllProjectTypesForBudgets,
 }

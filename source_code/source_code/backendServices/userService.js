@@ -23,6 +23,7 @@ async function insertOtherUser(firstName, lastName, streetName, city, province, 
 
             // Return the result of the INSERT operation
             if (insertResult.rowsAffected && insertResult.rowsAffected > 0) {
+                console.log("Created a other user.");
                 return {success: true, userID};
             };
         } catch (error) {
@@ -44,9 +45,11 @@ async function insertManager(firstName, lastName, streetName, city, province, po
             const managerInsertResult = await connection.execute(
                 `INSERT INTO Manager (userID, workExperience) VALUES (:userID, :workExperience)`,
                 { userID, workExperience },
+                {autoCommit: true},
             );
 
             if (managerInsertResult.rowsAffected && managerInsertResult.rowsAffected > 0) {
+                console.log("Created a other Manager.");
                 return {success: true, userID};
             } else {
                 return {success: false};

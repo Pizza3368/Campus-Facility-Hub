@@ -76,4 +76,18 @@ router.post("/deleteBudget", async (req, res) => {
     }
 });
 
+router.get("/getProjectTypes", async(req, res) => {
+    console.log("Called")
+    const retrievedProjectTypes = await budgetService.getAllProjectTypesForBudgets();
+    if (retrievedProjectTypes.success === true) {
+        res.status(200).json({
+            data: retrievedProjectTypes.projectsTypes,
+        })
+    }else{
+        res.status(500).json({
+            message: "Unable to retrieve project types."
+        })
+    }
+})
+
 module.exports = router;

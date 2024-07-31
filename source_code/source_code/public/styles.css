@@ -92,3 +92,11 @@ label {
     margin: 5px 0;
     font-size: 16px;
 }
+
+#budgetsContainer {
+    max-height: 80vh; /* Adjust the height as needed */
+    overflow-y: auto;
+    width: 100%; /* Ensure the container takes full width */
+    padding: 10px;
+    box-sizing: border-box;
+}
