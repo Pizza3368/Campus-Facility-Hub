@@ -16,11 +16,11 @@ window.onload = function() {
     });
 
     document.getElementById("budgets")?.addEventListener("click", () => {
-        alert("Should navigate to Budgets page.") /* Add code here.*/
+        window.location.href = "/pages/viewBudgetPage.html?userId="+encodeURIComponent(getUserId())
     });
 
     document.getElementById("maintainBudget")?.addEventListener("click", () => {
-        alert("Should navigate to maintain Budgets page.") /* Add code here.*/
+        window.location.href = "/pages/maintainBudgetPage.html?userId="+encodeURIComponent(getUserId())
     });
 
     document.getElementById("viewDevices")?.addEventListener("click", () => {

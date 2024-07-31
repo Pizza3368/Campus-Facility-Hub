@@ -1,6 +1,7 @@
 const express = require('express');
 const appController = require('../source_code/backendController/appController');
 const userController = require('../source_code/backendController/userController');
+const budgetController = require('../source_code/backendController/budgetController');
 // Load environment variables from .env file
 // Ensure your .env file has the required database credentials.
 const loadEnvFile = require('./utils/envUtil');
@@ -18,6 +19,10 @@ app.use('/', appController);
 
 // user router.
 app.use('/user', userController);
+
+// budget router.
+app.use("/budget", budgetController);
+
 
 // ----------------------------------------------------------
 // Starting the server
