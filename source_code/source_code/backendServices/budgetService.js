@@ -120,6 +120,66 @@ async function getAllProjectTypesForBudgets() {
     });
 }
 
+async function getTotalBudgetByProjectTypes() {
+    return await appService.withOracleDB(async(connection) => {
+        const result = await connection.execute(
+            `
+            SELECT projectType, SUM(amount) as totalBudget
+            FROM Budget
+            GROUP BY projectType
+            `,
+            [],
+            {autoCommit: true}
+        );
+
+        const projectsTypesToBudget = result.rows.map((row) => ({
+            projectType: row[0],
+            totalBudget: row[1],
+        }));
+
+        if (projectsTypesToBudget) {
+            return {success: true, projectsTypesToBudget}
+        }
+        else{
+            return {success: false}
+        }
+    }).catch((error) => {
+        console.error('Error in withOracleDB ', error);
+        return {success: false };
+    });
+}
+
+async function getProjectTypesHavingAmountExceedingAmountLimit() {
+    return await appService.withOracleDB(async(connection) => {
+        const result = await connection.execute(
+            `
+            SELECT Budget.projectType, SUM(Budget.amount) as totalBudget, ProjectCost.amountLimit
+            FROM Budget
+            JOIN ProjectCost ON Budget.projectType = ProjectCost.projectType
+            GROUP BY Budget.projectType, ProjectCost.amountLimit
+            HAVING SUM(Budget.amount) > ProjectCost.amountLimit
+            `,
+            [],
+            {autoCommit: true}
+        );
+
+        const projectsTypesToBudget = result.rows.map((row) => ({
+            projectType: row[0],
+            totalBudget: row[1],
+            amountLimit: row[2]
+        }));
+
+        if (projectsTypesToBudget) {
+            return {success: true, projectsTypesToBudget}
+        }
+        else{
+            return {success: false}
+        }
+    }).catch((error) => {
+        console.error('Error in withOracleDB ', error);
+        return {success: false };
+    });
+}
 
 
 module.exports = {
@@ -128,4 +188,6 @@ module.exports = {
     updateBudget,
     deleteBudget,
     getAllProjectTypesForBudgets,
+    getTotalBudgetByProjectTypes,
+    getProjectTypesHavingAmountExceedingAmountLimit,
 }
