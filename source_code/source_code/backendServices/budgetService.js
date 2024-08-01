@@ -121,7 +121,6 @@ async function getAllProjectTypesForBudgets() {
 }
 
 async function getTotalBudgetByProjectTypes() {
-    console.log("called")
     return await appService.withOracleDB(async(connection) => {
         const result = await connection.execute(
             `
@@ -150,6 +149,38 @@ async function getTotalBudgetByProjectTypes() {
     });
 }
 
+async function getProjectTypesHavingAmountExceedingAmountLimit() {
+    return await appService.withOracleDB(async(connection) => {
+        const result = await connection.execute(
+            `
+            SELECT Budget.projectType, SUM(Budget.amount) as totalBudget, ProjectCost.amountLimit
+            FROM Budget
+            JOIN ProjectCost ON Budget.projectType = ProjectCost.projectType
+            GROUP BY Budget.projectType, ProjectCost.amountLimit
+            HAVING SUM(Budget.amount) > ProjectCost.amountLimit
+            `,
+            [],
+            {autoCommit: true}
+        );
+
+        const projectsTypesToBudget = result.rows.map((row) => ({
+            projectType: row[0],
+            totalBudget: row[1],
+            amountLimit: row[2]
+        }));
+
+        if (projectsTypesToBudget) {
+            return {success: true, projectsTypesToBudget}
+        }
+        else{
+            return {success: false}
+        }
+    }).catch((error) => {
+        console.error('Error in withOracleDB ', error);
+        return {success: false };
+    });
+}
+
 
 module.exports = {
     getAllBudgetInformation,
@@ -158,4 +189,5 @@ module.exports = {
     deleteBudget,
     getAllProjectTypesForBudgets,
     getTotalBudgetByProjectTypes,
+    getProjectTypesHavingAmountExceedingAmountLimit,
 }

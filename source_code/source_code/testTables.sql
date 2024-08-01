@@ -1,3 +1,5 @@
-SELECT projectType, SUM(amount) as totalBudget
+SELECT Budget.projectType, SUM(Budget.amount) as totalBudget, ProjectCost.amountLimit
 FROM Budget
-GROUP BY projectType;
+JOIN ProjectCost ON Budget.projectType = ProjectCost.projectType
+GROUP BY Budget.projectType, ProjectCost.amountLimit
+HAVING SUM(Budget.amount) > ProjectCost.amountLimit;

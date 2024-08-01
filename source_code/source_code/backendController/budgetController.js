@@ -102,4 +102,17 @@ router.get("/getTotalBudgetByProjectType", async(req, res) => {
     }
 });
 
+router.get("/getProjectTypesHavingExceededAmount", async(req, res) => {
+    const retrievedResult = await budgetService.getProjectTypesHavingAmountExceedingAmountLimit();
+    if (retrievedResult.success === true) {
+        res.status(200).json({
+            data: retrievedResult.projectsTypesToBudget
+        })
+    }else{
+        res.status(500).json({
+            message: "Unabel to retrieve total budget by project type."
+        })
+    }
+});
+
 module.exports = router;
