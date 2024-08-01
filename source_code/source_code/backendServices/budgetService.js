@@ -120,6 +120,35 @@ async function getAllProjectTypesForBudgets() {
     });
 }
 
+async function getTotalBudgetByProjectTypes() {
+    console.log("called")
+    return await appService.withOracleDB(async(connection) => {
+        const result = await connection.execute(
+            `
+            SELECT projectType, SUM(amount) as totalBudget
+            FROM Budget
+            GROUP BY projectType
+            `,
+            [],
+            {autoCommit: true}
+        );
+
+        const projectsTypesToBudget = result.rows.map((row) => ({
+            projectType: row[0],
+            totalBudget: row[1],
+        }));
+
+        if (projectsTypesToBudget) {
+            return {success: true, projectsTypesToBudget}
+        }
+        else{
+            return {success: false}
+        }
+    }).catch((error) => {
+        console.error('Error in withOracleDB ', error);
+        return {success: false };
+    });
+}
 
 
 module.exports = {
@@ -128,4 +157,5 @@ module.exports = {
     updateBudget,
     deleteBudget,
     getAllProjectTypesForBudgets,
+    getTotalBudgetByProjectTypes,
 }

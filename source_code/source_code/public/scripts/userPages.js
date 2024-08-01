@@ -32,7 +32,7 @@ window.onload = function() {
     });
 
     document.getElementById("budgetReport")?.addEventListener("click", () => {
-        alert("Should navigate to Budget Report page.") /* Add code here.*/
+        window.location.href = "/pages/budgetReport/budgetReportStarterPage.html"
     });
 
     document.getElementById("maintainEvents")?.addEventListener("click", () => {
