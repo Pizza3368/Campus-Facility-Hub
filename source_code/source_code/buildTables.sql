@@ -86,5 +86,6 @@ INSERT INTO UserData (userID, firstName, lastName, SIN, address, postalCode) VAL
 INSERT INTO Manager (userID, workExperience) VALUES (1, 5);
 
 INSERT INTO Budget(budgetID, startDate, endDate, amount, managerID, projectType) VALUES (1, TO_DATE('2021-12-01', 'YYYY-MM-DD'), TO_DATE('2024-12-01', 'YYYY-MM-DD'), 5000 ,1, 'Servicing');
+INSERT INTO Budget(budgetID, startDate, endDate, amount, managerID, projectType) VALUES (4, TO_DATE('2021-12-01', 'YYYY-MM-DD'), TO_DATE('2024-12-01', 'YYYY-MM-DD'), 5000 ,1, 'Servicing');
 INSERT INTO Budget(budgetID, startDate, endDate, amount, managerID, projectType) VALUES (2, TO_DATE('2021-12-01', 'YYYY-MM-DD'), TO_DATE('2024-12-01', 'YYYY-MM-DD'), 5000 ,1, 'Salary');
 INSERT INTO Budget(budgetID, startDate, endDate, amount, managerID, projectType) VALUES (3, TO_DATE('2021-12-01', 'YYYY-MM-DD'), TO_DATE('2024-12-01', 'YYYY-MM-DD'), 65000 ,1, 'Events');

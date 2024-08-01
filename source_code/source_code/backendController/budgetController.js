@@ -77,7 +77,6 @@ router.post("/deleteBudget", async (req, res) => {
 });
 
 router.get("/getProjectTypes", async(req, res) => {
-    console.log("Called")
     const retrievedProjectTypes = await budgetService.getAllProjectTypesForBudgets();
     if (retrievedProjectTypes.success === true) {
         res.status(200).json({
@@ -89,5 +88,31 @@ router.get("/getProjectTypes", async(req, res) => {
         })
     }
 })
+
+router.get("/getTotalBudgetByProjectType", async(req, res) => {
+    const retrievedResult = await budgetService.getTotalBudgetByProjectTypes();
+    if (retrievedResult.success === true) {
+        res.status(200).json({
+            data: retrievedResult.projectsTypesToBudget
+        })
+    }else{
+        res.status(500).json({
+            message: "Unabel to retrieve total budget by project type."
+        })
+    }
+});
+
+router.get("/getProjectTypesHavingExceededAmount", async(req, res) => {
+    const retrievedResult = await budgetService.getProjectTypesHavingAmountExceedingAmountLimit();
+    if (retrievedResult.success === true) {
+        res.status(200).json({
+            data: retrievedResult.projectsTypesToBudget
+        })
+    }else{
+        res.status(500).json({
+            message: "Unabel to retrieve total budget by project type."
+        })
+    }
+});
 
 module.exports = router;
