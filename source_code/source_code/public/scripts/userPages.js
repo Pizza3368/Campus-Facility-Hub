@@ -40,11 +40,11 @@ window.onload = function() {
     });
 
     document.getElementById("serviceContract")?.addEventListener("click", () => {
-        alert("Should navigate to service contract page.") /* Add code here.*/
+        window.location.href = "/pages/serviceContractView.html"
     });
 
     document.getElementById("maintainServiceContract")?.addEventListener("click", () => {
-        alert("Should navigate to maintain service contract page.") /* Add code here.*/
+        window.location.href = "/pages/serviceContract.html"
     });
     
     console.log(getUserId());

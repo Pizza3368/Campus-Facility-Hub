@@ -2,66 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- This meta tag ensures that the website renders correctly across different device sizes, enhancing mobile responsiveness. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Link to the external CSS stylesheet -->
+    <!-- Link to the external CSS stylesheet. Uncomment if you wish to customize or add styling. -->
     <link rel="stylesheet" href="../styles.css">
 
-    <title>serviceContractsView</title>
-    <style>
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .filter {
-            text-align: right;
-            margin: 20px 0;
-        }
-        .card {
-            background-color: #e0f7ff;
-            padding: 20px;
-            margin: 10px 0;
-            border-radius: 8px;
-        }
-        .card h3 {
-            margin-top: 0;
-        }
-        .card p {
-            margin: 5px 0;
-        }
-    </style>
+    <title>View Service Contracts</title>
 </head>
 <body>
 
-<div class="container">
     <h2>Service Contracts</h2>
 
-    <div class="filter">
-        Filter By:
-        <select id="filter">
-            <option value="company">Company</option>
-            <option value="maintenance-request-id">Maintenance request ID</option>
-        </select>
-    </div>
-
-    <div class="card">
-        <h3>#3431</h3>
-        <p>Company Name: Servicing LTD.</p>
-        <p>Cost: $320</p>
-        <p>Company Rating: 4.5 / 5</p>
-        <p>For Maintenance requests: #3430, #3431, #3432</p>
-    </div>
-    <div class="card">
-        <h3>#3431</h3>
-        <p>Company Name: Servicing LTD.</p>
-        <p>Cost: $320</p>
-        <p>Company Rating: 4.5 / 5</p>
-        <p>For Maintenance requests: #3430, #3431, #3432</p>
-    </div>
-    <!-- Additional cards can be added here -->
-</div>
-
+    <div id="budgetsContainer"></div>
+    <!-- ===================================================================================== -->
+    <!-- External JavaScript file that contains the functionality/logic fors the operations above. -->
+    <script src="../scripts/serviceContract.js"></script>
 </body>
 </html>
