@@ -1,7 +1,7 @@
 # Facily Management Software System
 # Summary
 
-Our project is a comprehensive database system for Public Facility Management and
+This project is a comprehensive database system for Public Facility Management and
 Maintenance. It encompasses user management, maintenance management, budget
 management, and event scheduling. The system categorizes users into different roles,
 such as Managers, Event Organizers, and Staff Members, each with specific
@@ -13,17 +13,6 @@ contracts (also managers), and keep track of device maintenance schedules. This
 database system aims to streamline facility management processes, optimize resource
 allocation, and improve overall operational efficiency.
 
-# Time line and task breakdown
-
-Please refer to Project Timeline directory for plans and dates
-
-# UI design
-
-Please refer to Design/ directory
-
-# Milestones
-
-Please refer to Milestones/ directory
 
 # How to run
 
